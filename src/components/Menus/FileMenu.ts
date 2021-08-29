@@ -9,19 +9,25 @@ export class FileMenu {
         label: 'File',
         submenu: [
           { label: 'New map' },
+          { type: 'separator' },
           { label: 'Open Map' },
-          { label: 'Save' },
+          { type: 'separator' },
+          { label: 'Save', accelerator: 'CmdOrCtrl+S' },
           { label: 'Save As...' },
+          { type: 'separator' },
           { label: 'Close current map' },
+          { type: 'separator' },
           {
             label: 'Exit',
-            click() {
-              app.quit();
-            },
+            click: this.exit,
           },
         ],
       },
     ]);
     Menu.setApplicationMenu(this.menu);
   }
+  // newMap(): void {}
+  exit = (): void => {
+    this.app.quit();
+  };
 }

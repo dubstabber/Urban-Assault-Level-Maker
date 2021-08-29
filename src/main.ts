@@ -1,6 +1,7 @@
 import { app, BrowserWindow, Menu } from 'electron';
 import { FileMenu } from './components/Menus/FileMenu';
 import * as path from 'path';
+import './scss/app.scss';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
