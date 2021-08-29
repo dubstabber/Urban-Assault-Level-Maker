@@ -12,9 +12,20 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
+    <link rel="stylesheet" href="./app.css">
   </head>
   <body>
-    <div id="map"></div>
+    <div class="menu">
+      File
+      <ul class="menu__list">
+        <li class="menu__item" id="newMap">New map</li>
+        <li class="menu__item" id="openMap">Open map</li>
+        <li class="menu__item" id="saveMap">Save</li>
+        <li class="menu__item" id="saveAsMap">Save As...</li>
+        <li class="menu__item" id="closeMap">Close current map</li>
+        <li class="menu__item" id="exit">Exit</li>
+      </ul>
+    </div>
 
     <!-- You can also require other files to run in this process -->
     <script src="./dist/renderer.js"></script>

@@ -1,3 +1,9 @@
+import { FileMenu } from './components/Menus/FileMenu';
+
 window.addEventListener('DOMContentLoaded', () => {
-  const map = document.getElementById('map');
+  menus.fileMenu.listen();
 });
+
+export const menus = {
+  fileMenu: new FileMenu(),
+};

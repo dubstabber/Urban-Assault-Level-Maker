@@ -1,7 +1,6 @@
-import { app, BrowserWindow, Menu } from 'electron';
-import { FileMenu } from './components/Menus/FileMenu';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
-import './scss/app.scss';
+import { FileMenu } from './components/Menus/FileMenu';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -11,9 +10,9 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
     },
     icon: path.join(__dirname, '../resources/img/icon.png'),
+    autoHideMenuBar: true,
   });
   mainWindow.loadFile(path.join(__dirname, '../index.html'));
-  const fileM = new FileMenu(app);
   mainWindow.webContents.openDevTools();
 }
 
@@ -29,4 +28,8 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+ipcMain.handle('quit-app', () => {
+  app.quit();
 });
