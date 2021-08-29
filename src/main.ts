@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
+import { FileMenu } from './components/Menus/FileMenu';
 import * as path from 'path';
 
 function createWindow() {
@@ -9,11 +10,9 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
     },
     icon: path.join(__dirname, '../resources/img/icon.png'),
-    autoHideMenuBar: true,
   });
-
   mainWindow.loadFile(path.join(__dirname, '../index.html'));
-
+  const fileM = new FileMenu(app);
   mainWindow.webContents.openDevTools();
 }
 
