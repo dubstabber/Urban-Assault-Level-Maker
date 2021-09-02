@@ -1,4 +1,4 @@
-import { App, ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron';
 
 export class FileMenu {
   private newMapMenu: HTMLElement;
