@@ -1,0 +1,25 @@
+$background-color: rgb(56, 56, 56);
+$font-color: red;
+$popup-color: darkgray;
+
+@font-face {
+  font-family: 'Xolonium';
+  src: url('../../resources/Xolonium-Regular.ttf');
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Xolonium';
+  background-color: $background-color;
+}

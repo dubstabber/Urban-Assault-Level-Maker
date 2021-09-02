@@ -1,5 +1,36 @@
 .menu {
+  width: auto;
+  cursor: pointer;
+  color: white;
+  display: inline-block;
+
+  &__checkbox {
+    display: none;
+  }
+
+  &__checkbox:checked ~ &__list {
+    display: block;
+  }
+
+  &__title {
+    cursor: pointer;
+    &:hover {
+      color: $font-color;
+    }
+  }
+
   &__list {
-    background-color: darkgray;
+    background-color: $popup-color;
+    list-style: none;
+    display: none;
+    &:focus {
+      display: block;
+    }
+  }
+
+  &__item {
+    &:hover {
+      color: $font-color;
+    }
   }
 }
