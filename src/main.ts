@@ -1,6 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
-import { FileMenu } from './components/Menus/FileMenu';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -8,11 +7,13 @@ function createWindow() {
     height: 800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      enableRemoteModule: true,
     },
     icon: path.join(__dirname, '../resources/img/icon.png'),
     autoHideMenuBar: true,
   });
-  mainWindow.loadFile(path.join(__dirname, '../index.html'));
+  mainWindow.loadFile(path.join(__dirname, '../html/index.html'));
   mainWindow.webContents.openDevTools();
 }
 
