@@ -8,15 +8,15 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ 
-    width: 1600, 
-    height: 800 ,
+  mainWindow = new BrowserWindow({
+    width: 1600,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
       contextIsolation: false,
       nodeIntegrationInWorker: true,
-      nodeIntegrationInSubFrames: true
+      nodeIntegrationInSubFrames: true,
     },
     icon: path.join(__dirname, '../resources/img/icon.png'),
     autoHideMenuBar: true,

@@ -13,6 +13,7 @@
 html {
   box-sizing: border-box;
   --main-color: rgb(56, 56, 56);
+  --main-color-2: rgb(26, 26, 26);
   --font-color: red;
   --hover-color: darkgray;
 }

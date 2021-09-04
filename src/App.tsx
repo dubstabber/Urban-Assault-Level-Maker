@@ -1,13 +1,15 @@
-import FileMenu from './components/Menus/FileMenu';
+import Menus from './components/Menus/Menus';
+import Map from './components/Map/Map';
 
 import './App.css';
 
 // const fs = window.require('fs');
 
 function App(): JSX.Element {
-
-  return (
-    <FileMenu />
+  return (<div>
+      <Menus />
+      <Map />
+    </div>
   );
 }
 

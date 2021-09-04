@@ -1,11 +1,8 @@
-import React from 'react'
-import './FileMenu.css'
-
 const FileMenu = () => {
     return (
-        <div className="menu">
+        <>
             <span className="menu__title">File</span>
-            <ul className="menu__list">
+            <ul className="menu__list--disabled" id="fileMenu">
                 <li className="menu__item" id="newMap">New map</li>
                 <li className="menu__item" id="openMap">Open map</li>
                 <li className="menu__item" id="saveMap">Save</li>
@@ -13,7 +10,7 @@ const FileMenu = () => {
                 <li className="menu__item" id="closeMap">Close current map</li>
                 <li className="menu__item" id="exit">Exit</li>
             </ul>
-        </div>
+        </>
     )
 }
 

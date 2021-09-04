@@ -1,11 +1,11 @@
 .menu {
-  width: auto;
+  width: 100vw;
   cursor: pointer;
+  background-color: var(--main-color-2);
   color: white;
   display: inline-block;
   padding: 5px;
 }
-
 .menu__title {
   padding: 5px;
 }
@@ -14,9 +14,14 @@
   background-color: var(--hover-color);
 }
 
-.menu__list {
+.menu__list--disabled {
   background-color: var(--hover-color);
   display: none;
+}
+
+.menu__list--enabled {
+  background-color: var(--hover-color);
+  display: block;
 }
 
 .menu__item:hover {
