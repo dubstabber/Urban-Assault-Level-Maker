@@ -1,29 +1,48 @@
 {
-  "name": "urban-assault-level-maker",
-  "version": "1.0.0",
-  "description": "Level maker for game Urban Assault",
+  "name": "electron-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.4.2",
+    "web-vitals": "^1.0.1"
+  },
+  "homepage": "./",
+  "main": "src/electron-starter.js",
   "scripts": {
-    "build": "tsc",
-    "compile:css": "node-sass src/sass/main.scss app.comp.css",
-    "compress:css": "node-sass app.comp.css app.css --output-style compressed",
-    "lint": "eslint -c .eslintrc --ext .ts ./src",
-    "run:electron": "electron ./dist/main.js",
-    "start": "npm-run-all build compile:css compress:css run:electron"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron ."
   },
-  "keywords": [
-    "Electron",
-    "typescript"
-  ],
-  "author": "Dubstabber",
-  "license": "CC0-1.0",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
-    "electron": "^13.1.7",
-    "eslint": "^7.32.0",
-    "node-sass": "^6.0.1",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^4.3.5"
-  },
-  "dependencies": {}
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
+    "electron": "^14.0.0"
+  }
 }

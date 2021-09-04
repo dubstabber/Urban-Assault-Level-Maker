@@ -1,0 +1,24 @@
+.menu {
+  width: auto;
+  cursor: pointer;
+  color: white;
+  display: inline-block;
+  padding: 5px;
+}
+
+.menu__title {
+  padding: 5px;
+}
+
+.menu__title:hover {
+  background-color: var(--hover-color);
+}
+
+.menu__list {
+  background-color: var(--hover-color);
+  display: none;
+}
+
+.menu__item:hover {
+  color: var(--font-color);
+}

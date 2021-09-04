@@ -1,12 +1,7 @@
-$background-color: rgb(56, 56, 56);
-$font-color: red;
-$popup-color: darkgray;
-
 @font-face {
   font-family: 'Xolonium';
   src: url('./resources/Xolonium-Regular.ttf');
 }
-
 *,
 *::before,
 *::after {
@@ -17,9 +12,18 @@ $popup-color: darkgray;
 
 html {
   box-sizing: border-box;
+  --main-color: rgb(56, 56, 56);
+  --font-color: red;
+  --hover-color: darkgray;
 }
 
 body {
+  margin: 0;
   font-family: 'Xolonium';
-  background-color: $background-color;
+  background-color: var(--main-color);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
