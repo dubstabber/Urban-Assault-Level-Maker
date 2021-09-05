@@ -21,7 +21,8 @@
 
 .menu__list--enabled {
   background-color: var(--hover-color);
-  display: block;
+  display: inline-block;
+  list-style-type: none;
 }
 
 .menu__item:hover {

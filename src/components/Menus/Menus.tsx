@@ -1,4 +1,4 @@
-import FileMenu from './FileMenu/FileMenu'
+import {FileMenu} from './FileMenu/FileMenu';
 
 import './Menus.css'
 

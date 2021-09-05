@@ -1,1 +1,3 @@
-export const TOGGLE_MENU = 'TOGGLE_MENU';
+export enum ActionTypes {
+  TOGGLE_MENU,
+}

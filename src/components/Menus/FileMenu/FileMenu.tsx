@@ -1,8 +1,17 @@
-const FileMenu = () => {
+import { connect } from 'react-redux';
+import { MenuState, toggleMenu } from '../../../actions/menuActions';
+import { StoreState } from '../../../reducers';
+
+interface FileMenuProps {
+    menu: MenuState;
+    toggleMenu(): void;
+}
+
+const _FileMenu = ({menu:{activatedMenu}, toggleMenu}:FileMenuProps) => {
     return (
         <>
-            <span className="menu__title">File</span>
-            <ul className="menu__list--disabled" id="fileMenu">
+            <span onClick={toggleMenu} className="menu__title">File</span>
+            <ul className={activatedMenu ? "menu__list--enabled" : "menu__list--disabled"} id="fileMenu">
                 <li className="menu__item" id="newMap">New map</li>
                 <li className="menu__item" id="openMap">Open map</li>
                 <li className="menu__item" id="saveMap">Save</li>
@@ -14,4 +23,8 @@ const FileMenu = () => {
     )
 }
 
-export default FileMenu
+const mapStateToProps = (state: StoreState) => ({
+    menu: state.menu
+})
+
+export const FileMenu = connect(mapStateToProps, {toggleMenu})(_FileMenu);
