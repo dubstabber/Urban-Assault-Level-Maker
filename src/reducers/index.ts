@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import menuReducer from './menuReducer';
-import { MenuState } from '../actions/menuActions';
+import { menuReducer, MenuState } from './menuReducer';
 
 export interface StoreState {
   menu: MenuState;

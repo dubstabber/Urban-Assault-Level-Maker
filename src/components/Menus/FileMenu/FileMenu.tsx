@@ -1,24 +1,23 @@
 import { connect } from 'react-redux';
-import { MenuState, toggleMenu } from '../../../actions/menuActions';
+import { toggleMenu, hoverMenu } from '../../../actions/menuActions';
 import { StoreState } from '../../../reducers';
+import { MenuProps } from '../Menus';
 
-interface FileMenuProps {
-    menu: MenuState;
-    toggleMenu(): void;
-}
+const _FileMenu = ({id,menu:{activatedMenu, hoverMenuId}, toggleMenu, hoverMenu}:MenuProps) => {
 
-const _FileMenu = ({menu:{activatedMenu}, toggleMenu}:FileMenuProps) => {
     return (
         <>
-            <span onClick={toggleMenu} className="menu__title">File</span>
-            <ul className={activatedMenu ? "menu__list--enabled" : "menu__list--disabled"} id="fileMenu">
-                <li className="menu__item" id="newMap">New map</li>
-                <li className="menu__item" id="openMap">Open map</li>
-                <li className="menu__item" id="saveMap">Save</li>
-                <li className="menu__item" id="saveAsMap">Save As...</li>
-                <li className="menu__item" id="closeMap">Close current map</li>
-                <li className="menu__item" id="exit">Exit</li>
-            </ul>
+            <div className="menu__container">
+                <span onClick={toggleMenu} onMouseOver={() => hoverMenu(id)} className="menu__title">File</span>
+                <ul className={activatedMenu && id === hoverMenuId ? "menu__list--enabled" : "menu__list--disabled"}>
+                    <li className="menu__item" id="newMap">New map</li>
+                    <li className="menu__item" id="openMap">Open map</li>
+                    <li className="menu__item" id="saveMap">Save</li>
+                    <li className="menu__item" id="saveAsMap">Save As...</li>
+                    <li className="menu__item" id="closeMap">Close current map</li>
+                    <li className="menu__item" id="exit">Exit</li>
+                </ul>
+            </div>
         </>
     )
 }
@@ -27,4 +26,4 @@ const mapStateToProps = (state: StoreState) => ({
     menu: state.menu
 })
 
-export const FileMenu = connect(mapStateToProps, {toggleMenu})(_FileMenu);
+export const FileMenu = connect(mapStateToProps, {toggleMenu, hoverMenu})(_FileMenu);

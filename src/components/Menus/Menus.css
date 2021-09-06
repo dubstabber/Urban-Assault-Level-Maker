@@ -1,17 +1,19 @@
 .menu {
   width: 100vw;
-  cursor: pointer;
   background-color: var(--main-color-2);
+  user-select: none;
   color: white;
   display: inline-block;
   padding: 5px;
 }
-.menu__title {
-  padding: 5px;
+
+.menu__container {
+  display: inline-block;
+  position: relative;
 }
 
-.menu__title:hover {
-  background-color: var(--hover-color);
+.menu__title {
+  padding: 5px;
 }
 
 .menu__list--disabled {
@@ -20,11 +22,17 @@
 }
 
 .menu__list--enabled {
-  background-color: var(--hover-color);
-  display: inline-block;
+  display: block;
+  position: absolute;
   list-style-type: none;
+  background-color: var(--hover-color);
+  white-space: nowrap;
+}
+
+.menu__title:hover {
+  background-color: var(--hover-color);
 }
 
 .menu__item:hover {
-  color: var(--font-color);
+  background-color: var(--main-color-2);
 }
