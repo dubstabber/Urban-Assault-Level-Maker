@@ -1,5 +1,5 @@
-import { FileMenu } from './FileMenu/FileMenu';
-import { ViewMenu } from './ViewMenu/ViewMenu';
+import { FileMenu } from './FileMenu';
+import { ViewMenu } from './ViewMenu';
 import { MenuState } from '../../reducers/menuReducer';
 
 import './Menus.css'
