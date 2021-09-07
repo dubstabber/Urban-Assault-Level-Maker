@@ -6,9 +6,6 @@ import Windows from './components/Windows/Windows';
 
 import './App.css';
 
-
-// const fs = window.require('fs');
-
 function App(): JSX.Element {
   return (
     <Provider store={store}>
