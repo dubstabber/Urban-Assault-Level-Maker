@@ -6,7 +6,6 @@ import { WindowProps } from './Windows';
 import './Windows.css'
 
 const _NewMapWindow = ({window: {newMapEnabled}, toggleNewMapWindow}: WindowProps) => {
-
     if(!newMapEnabled) return <></>
 
     return (

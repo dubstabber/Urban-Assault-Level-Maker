@@ -20,6 +20,11 @@ const menuReducer = (
         ...state,
         activatedMenu: !state.activatedMenu,
       };
+    case ActionTypes.DISABLE_MENU:
+      return {
+        ...state,
+        activatedMenu: false,
+      };
     case ActionTypes.HOVER_MENU:
       return {
         ...state,

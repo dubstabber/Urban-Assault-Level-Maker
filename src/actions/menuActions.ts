@@ -7,6 +7,12 @@ export const toggleMenu =
     dispatch({ type: ActionTypes.TOGGLE_MENU });
   };
 
+export const disableMenu =
+  () =>
+  (dispatch: Dispatch): void => {
+    dispatch({ type: ActionTypes.DISABLE_MENU });
+  };
+
 export const hoverMenu =
   (id: number) =>
   (dispatch: Dispatch): void => {
