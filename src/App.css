@@ -1,11 +1,9 @@
 .button {
   font-family: 'Xolonium';
   font-size: 1.6rem;
-  background-color: var(--main-color-2);
   color: white;
   cursor: pointer;
   user-select: none;
-  margin: auto;
   border: 0.2rem solid white;
   border-radius: 0.5rem;
   padding: 0.5rem;

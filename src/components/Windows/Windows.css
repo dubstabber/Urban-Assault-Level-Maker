@@ -5,12 +5,12 @@
   transform: translate(-50%, -50%);
   background-color: var(--main-color-2);
   border-radius: 1rem;
-  padding: 1rem;
   font-size: 1.6rem;
   color: white;
 }
 
 .window__title {
+  padding: 1rem;
   text-align: center;
   user-select: none;
 }
