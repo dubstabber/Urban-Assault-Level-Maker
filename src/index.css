@@ -11,6 +11,8 @@
 }
 
 html {
+  /* This defines what 1rem is */
+  font-size: 62.5%; /*1 rem = 10px; 10px/16px = 62.5% */
   box-sizing: border-box;
   --main-color: rgb(56, 56, 56);
   --main-color-2: rgb(26, 26, 26);

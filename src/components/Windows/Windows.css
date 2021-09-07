@@ -1,3 +1,16 @@
 .window {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--main-color-2);
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+  color: white;
+}
+
+.window__title {
+  text-align: center;
+  user-select: none;
 }

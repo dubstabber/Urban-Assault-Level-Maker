@@ -1,0 +1,25 @@
+.newMapWindow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.newMapWindow__info {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.newMapWindow__label {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.newMapWindow__input {
+  width: 5rem;
+}
+
+.newMapWindow__buttons {
+  grid-column: 1 / -1;
+  margin: auto;
+}
