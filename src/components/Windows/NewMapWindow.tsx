@@ -34,16 +34,14 @@ const _NewMapWindow = ({
   }
 
   function verifyHorizontalInput(e: ChangeEvent<HTMLInputElement>) {
-    const lastInput = e.target.value[e.target.value.length - 1];
-    if (!(lastInput && lastInput.match(/^[a-z]+$/i))) {
-      setHorizontalNumberInput(e.target.value);
+    if (!e.target.value.match(/[a-z]/gi)) {
+      setHorizontalNumberInput(e.target.value.trim());
     }
   }
 
   function verifyVerticalInput(e: ChangeEvent<HTMLInputElement>) {
-    const lastInput = e.target.value[e.target.value.length - 1];
-    if (!(lastInput && lastInput.match(/^[a-z]+$/i))) {
-      setVerticalNumberInput(e.target.value);
+    if (!e.target.value.match(/[a-z]/gi)) {
+      setVerticalNumberInput(e.target.value.trim());
     }
   }
 
