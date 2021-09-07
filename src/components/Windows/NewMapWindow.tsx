@@ -17,7 +17,7 @@ const _NewMapWindow = ({
 
   if (!newMapEnabled) return <></>;
 
-  function handleCreate() {
+  function handleCreate(): void {
     let horizontalNumber = parseInt(horizontalNumberInput.trim());
     let verticalNumber = parseInt(verticalNumberInput.trim());
 
@@ -33,14 +33,14 @@ const _NewMapWindow = ({
     }
   }
 
-  function verifyHorizontalInput(e: any) {
+  function verifyHorizontalInput(e: ChangeEvent<HTMLInputElement>) {
     const lastInput = e.target.value[e.target.value.length - 1];
     if (!(lastInput && lastInput.match(/^[a-z]+$/i))) {
       setHorizontalNumberInput(e.target.value);
     }
   }
 
-  function verifyVerticalInput(e: any) {
+  function verifyVerticalInput(e: ChangeEvent<HTMLInputElement>) {
     const lastInput = e.target.value[e.target.value.length - 1];
     if (!(lastInput && lastInput.match(/^[a-z]+$/i))) {
       setVerticalNumberInput(e.target.value);
