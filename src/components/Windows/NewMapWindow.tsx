@@ -32,14 +32,22 @@ const _NewMapWindow = ({
 
   function verifyHorizontalInput(e: ChangeEvent<HTMLInputElement>) {
     const pattern = /[a-z!@#$%^&*()_+\-=[\]{};~`':"\\|,.<>/?]/gi;
-    if (!e.target.value.match(pattern) && e.target.value[0] !== '0') {
+    if (
+      !e.target.value.match(pattern) &&
+      e.target.value[0] !== '0' &&
+      e.target.value[0] !== ' '
+    ) {
       setHorizontalNumberInput(e.target.value);
     }
   }
 
   function verifyVerticalInput(e: ChangeEvent<HTMLInputElement>) {
     const pattern = /[a-z!@#$%^&*()_+\-=[\]{};~`':"\\|,.<>/?]/gi;
-    if (!e.target.value.match(pattern) && e.target.value[0] !== '0') {
+    if (
+      !e.target.value.match(pattern) &&
+      e.target.value[0] !== '0' &&
+      e.target.value[0] !== ' '
+    ) {
       setVerticalNumberInput(e.target.value);
     }
   }
