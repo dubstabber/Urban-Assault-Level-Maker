@@ -1,5 +1,6 @@
 .menu {
   width: 100vw;
+  height: 3rem;
   background-color: var(--main-color-2);
   user-select: none;
   color: white;

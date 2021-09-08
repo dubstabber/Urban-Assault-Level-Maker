@@ -3,11 +3,13 @@ import { ActionTypes } from '../actions/types';
 export interface MapState {
   horizontalSectors: number;
   verticalSectors: number;
+  sectorSize: number;
 }
 
 const initialState: MapState = {
   horizontalSectors: 0,
   verticalSectors: 0,
+  sectorSize: 50,
 };
 
 const mapReducer = (
