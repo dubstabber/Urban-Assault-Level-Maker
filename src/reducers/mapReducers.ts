@@ -4,12 +4,14 @@ export interface MapState {
   horizontalSectors: number;
   verticalSectors: number;
   sectorSize: number;
+  sectorIndent: number;
 }
 
 const initialState: MapState = {
   horizontalSectors: 0,
   verticalSectors: 0,
   sectorSize: 50,
+  sectorIndent: 2,
 };
 
 const mapReducer = (

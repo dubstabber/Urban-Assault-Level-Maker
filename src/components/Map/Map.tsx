@@ -6,7 +6,7 @@ import { StoreState } from '../../reducers';
 import './Map.css';
 
 const _Map = ({
-  map: { sectorSize, horizontalSectors, verticalSectors },
+  map: { sectorSize, horizontalSectors, verticalSectors, sectorIndent },
   disableMenu,
 }: any) => {
   let canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -31,8 +31,8 @@ const _Map = ({
         for (let sectorX = 0; sectorX <= horizontalSectors; sectorX++) {
           if (sectorY > 0 && sectorX > 0) {
             ctx.current.rect(
-              sectorX * sectorSize,
-              sectorY * sectorSize,
+              sectorX * (sectorSize + sectorIndent),
+              sectorY * (sectorSize + sectorIndent),
               sectorSize,
               sectorSize
             );
@@ -45,8 +45,12 @@ const _Map = ({
 
   useEffect(() => {
     if (canvasRef.current && horizontalSectors && verticalSectors) {
-      canvasRef.current.width = horizontalSectors * sectorSize + sectorSize * 2;
-      canvasRef.current.height = verticalSectors * sectorSize + sectorSize * 2;
+      canvasRef.current.width =
+        horizontalSectors * (sectorSize + sectorIndent) +
+        (sectorSize + sectorIndent) * 2;
+      canvasRef.current.height =
+        verticalSectors * (sectorSize + sectorIndent) +
+        (sectorSize + sectorIndent) * 2;
       draw();
     }
   });
