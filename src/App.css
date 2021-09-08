@@ -13,6 +13,17 @@
   color: gray;
 }
 
+.inactive-button {
+  font-family: 'Xolonium';
+  font-size: 1.6rem;
+  color: gray;
+  user-select: none;
+  border: 0.2rem solid gray;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
 .input {
   font-family: 'Xolonium';
   color: black;

@@ -12,36 +12,35 @@ const _NewMapWindow = ({
   toggleNewMapWindow,
   createMap,
 }: any) => {
-  const [horizontalNumberInput, setHorizontalNumberInput] = useState('');
-  const [verticalNumberInput, setVerticalNumberInput] = useState('');
+  const [horizontalNumberInput, setHorizontalNumberInput] =
+    useState<string>('');
+  const [verticalNumberInput, setVerticalNumberInput] = useState<string>('');
 
   if (!newMapEnabled) return <></>;
 
   function handleCreate(): void {
-    let horizontalNumber = parseInt(horizontalNumberInput.trim());
-    let verticalNumber = parseInt(verticalNumberInput.trim());
+    let horizontalNumber = parseInt(horizontalNumberInput);
+    let verticalNumber = parseInt(verticalNumberInput);
 
     if (horizontalNumber && verticalNumber) {
       toggleNewMapWindow(false);
       createMap(horizontalNumber, verticalNumber);
       setHorizontalNumberInput('');
       setVerticalNumberInput('');
-    } else {
-      console.log(
-        'Both values should not be empty and should be greater than 0'
-      );
     }
   }
 
   function verifyHorizontalInput(e: ChangeEvent<HTMLInputElement>) {
-    if (!e.target.value.match(/[a-z]/gi)) {
-      setHorizontalNumberInput(e.target.value.trim());
+    const pattern = /[a-z!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/gi;
+    if (!e.target.value.match(pattern) && e.target.value[0] !== '0') {
+      setHorizontalNumberInput(e.target.value);
     }
   }
 
   function verifyVerticalInput(e: ChangeEvent<HTMLInputElement>) {
-    if (!e.target.value.match(/[a-z]/gi)) {
-      setVerticalNumberInput(e.target.value.trim());
+    const pattern = /[a-z!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/gi;
+    if (!e.target.value.match(pattern) && e.target.value[0] !== '0') {
+      setVerticalNumberInput(e.target.value);
     }
   }
 
@@ -71,7 +70,14 @@ const _NewMapWindow = ({
           (Borders will be added automatically to these values)
         </div>
         <div className="newMapWindow__buttons">
-          <span onClick={handleCreate} className="button">
+          <span
+            onClick={handleCreate}
+            className={
+              horizontalNumberInput && verticalNumberInput
+                ? 'button'
+                : 'inactive-button'
+            }
+          >
             Create
           </span>
           <span onClick={() => toggleNewMapWindow(false)} className="button">
