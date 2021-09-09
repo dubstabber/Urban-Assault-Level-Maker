@@ -1,5 +1,9 @@
-.contentMenu {
+.contextMenu {
   position: absolute;
   width: auto;
   overflow: hidden;
+  display: block;
+  white-space: nowrap;
+  height: auto;
+  z-index: 1;
 }

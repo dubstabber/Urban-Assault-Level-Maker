@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { disableMenu } from '../../actions/menuActions';
 import { useState, useRef, useEffect, MouseEvent } from 'react';
 import { StoreState } from '../../reducers';
-import ContextMenu from '../Menus/ContentMenu';
+import ContextMenu from '../Menus/ContextMenu';
 
 import './Map.css';
 
@@ -69,7 +69,6 @@ const _Map = ({
   function handleRightClick(e: MouseEvent) {
     e.preventDefault();
     disableMenu();
-
     setAnchorPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
     setContextMenu(true);
   }

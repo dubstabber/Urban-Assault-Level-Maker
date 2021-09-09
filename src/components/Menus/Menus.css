@@ -29,6 +29,7 @@
   list-style-type: none;
   background-color: var(--hover-color);
   white-space: nowrap;
+  z-index: 1;
 }
 
 .menu__title:hover {
