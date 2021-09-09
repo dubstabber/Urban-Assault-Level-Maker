@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { disableMenu } from '../../actions/menuActions';
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, MouseEvent } from 'react';
 import { StoreState } from '../../reducers';
+import ContextMenu from '../Menus/ContentMenu';
 
 import './Map.css';
 
@@ -9,6 +10,8 @@ const _Map = ({
   map: { sectorSize, horizontalSectors, verticalSectors, sectorIndent },
   disableMenu,
 }: any) => {
+  const [contextMenu, setContextMenu] = useState(false);
+  const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   let canvasRef = useRef<HTMLCanvasElement | null>(null);
   let ctx = useRef<CanvasRenderingContext2D | null>(null);
 
@@ -17,6 +20,21 @@ const _Map = ({
       ctx.current = canvasRef.current.getContext('2d');
     }
   }, [canvasRef]);
+
+  useEffect(() => {
+    if (canvasRef.current && horizontalSectors && verticalSectors) {
+      canvasRef.current.width =
+        horizontalSectors * (sectorSize + sectorIndent) +
+        (sectorSize + sectorIndent) * 2;
+      canvasRef.current.height =
+        verticalSectors * (sectorSize + sectorIndent) +
+        (sectorSize + sectorIndent) * 2;
+    }
+  }, [horizontalSectors, verticalSectors, sectorSize, sectorIndent]);
+
+  useEffect(() => {
+    draw();
+  });
 
   function draw() {
     if (canvasRef.current && ctx.current) {
@@ -43,22 +61,32 @@ const _Map = ({
     }
   }
 
-  useEffect(() => {
-    if (canvasRef.current && horizontalSectors && verticalSectors) {
-      canvasRef.current.width =
-        horizontalSectors * (sectorSize + sectorIndent) +
-        (sectorSize + sectorIndent) * 2;
-      canvasRef.current.height =
-        verticalSectors * (sectorSize + sectorIndent) +
-        (sectorSize + sectorIndent) * 2;
-      draw();
-    }
-  });
+  function handleLeftClick(e: MouseEvent) {
+    e.preventDefault();
+    disableMenu();
+    setContextMenu(false);
+  }
+  function handleRightClick(e: MouseEvent) {
+    e.preventDefault();
+    disableMenu();
+
+    setAnchorPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+    setContextMenu(true);
+  }
 
   return (
-    <div onClick={disableMenu} className="map">
-      <canvas ref={canvasRef}></canvas>
-    </div>
+    <>
+      <div
+        onClick={handleLeftClick}
+        onContextMenu={handleRightClick}
+        className="map"
+      >
+        <canvas ref={canvasRef}></canvas>
+        {contextMenu && (
+          <ContextMenu posX={anchorPoint.x} posY={anchorPoint.y} />
+        )}
+      </div>
+    </>
   );
 };
 
