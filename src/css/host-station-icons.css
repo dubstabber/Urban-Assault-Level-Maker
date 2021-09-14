@@ -1,0 +1,33 @@
+.host-station-icon {
+  width: 2rem;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.resistance-icon {
+  content: url('../resources/img/res.png');
+}
+
+.ghorkov-icon {
+  content: url('../resources/img/Ghor.png');
+}
+
+.taerkasten-icon {
+  content: url('../resources/img/Taer.png');
+}
+
+.mykonian-icon {
+  content: url('../resources/img/Myko.png');
+}
+
+.sulgogar-icon {
+  content: url('../resources/img/Sulg.png');
+}
+
+.black-sect-icon {
+  content: url('../resources/img/Blacksect.png');
+}
+
+.training-icon {
+  content: url('../resources/img/Training.png');
+}

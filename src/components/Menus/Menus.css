@@ -27,6 +27,7 @@
   display: block;
   position: absolute;
   list-style-type: none;
+  border-radius: 0.4rem;
   background-color: var(--hover-color);
   white-space: nowrap;
   z-index: 1;
@@ -36,6 +37,42 @@
   background-color: var(--hover-color);
 }
 
+.menu__items {
+  display: list-item;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.menu__items::after {
+  content: ' \003E';
+  float: right;
+}
+.menu__items:hover {
+  background-color: var(--main-color-2);
+}
+
+.menu__item {
+  padding: 0.5rem;
+}
 .menu__item:hover {
   background-color: var(--main-color-2);
+}
+
+.menu__submenu {
+  display: none;
+  list-style-type: none;
+  background-color: var(--hover-color);
+  position: absolute;
+  border-radius: 0.4rem;
+  top: 0;
+  left: 100%;
+  overflow: visible;
+}
+
+.menu__submenu::after {
+  background-color: var(--main-color-2);
+}
+
+.menu__items:hover > .menu__submenu {
+  display: list-item;
 }

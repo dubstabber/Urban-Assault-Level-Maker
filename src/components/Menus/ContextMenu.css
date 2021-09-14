@@ -1,9 +1,14 @@
 .contextMenu {
   position: absolute;
   width: auto;
-  overflow: hidden;
   display: block;
+  list-style-type: none;
+  user-select: none;
   white-space: nowrap;
+  background-color: var(--hover-color);
   height: auto;
+  font-size: 1.6rem;
+  color: white;
+  border-radius: 0.4rem;
   z-index: 1;
 }
