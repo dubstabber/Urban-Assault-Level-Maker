@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
+import { toggleContextMenu } from '../../actions/menuActions';
 import { MouseEvent } from 'react';
 
 import './ContextMenu.css';
 import '../../css/host-station-icons.css';
-import { toggleContextMenu } from '../../actions/menuActions';
 
 const _ContextMenu = ({ posX, posY, toggleContextMenu }: any) => {
   function handleClick(e: MouseEvent) {
