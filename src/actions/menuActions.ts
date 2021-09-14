@@ -18,3 +18,12 @@ export const hoverMenu =
   (dispatch: Dispatch): void => {
     dispatch({ type: ActionTypes.HOVER_MENU, payload: { menuId: id } });
   };
+
+export const toggleContextMenu =
+  (state: boolean) =>
+  (dispatch: Dispatch): void => {
+    dispatch({
+      type: ActionTypes.TOGGLE_CONTEXT_MENU,
+      payload: { contextState: state },
+    });
+  };

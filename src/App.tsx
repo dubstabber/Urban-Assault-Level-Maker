@@ -1,4 +1,4 @@
-import Menus from './components/Menus/Menus';
+import { Menus } from './components/Menus/Menus';
 import { Map } from './components/Map/Map';
 import { Provider } from 'react-redux';
 import store from './store';

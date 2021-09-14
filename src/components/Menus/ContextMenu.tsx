@@ -1,15 +1,18 @@
+import { connect } from 'react-redux';
 import { MouseEvent } from 'react';
 
 import './ContextMenu.css';
 import '../../css/host-station-icons.css';
+import { toggleContextMenu } from '../../actions/menuActions';
 
-const ContextMenu = ({ posX, posY }: any) => {
+const _ContextMenu = ({ posX, posY, toggleContextMenu }: any) => {
   function handleClick(e: MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
   }
 
   function addHostStation(id: number): void {
+    toggleContextMenu(false);
     console.log(`create a host station: ${id}`);
   }
 
@@ -58,4 +61,4 @@ const ContextMenu = ({ posX, posY }: any) => {
   );
 };
 
-export default ContextMenu;
+export const ContextMenu = connect(null, { toggleContextMenu })(_ContextMenu);

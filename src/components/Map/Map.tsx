@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
-import { disableMenu } from '../../actions/menuActions';
+import { disableMenu, toggleContextMenu } from '../../actions/menuActions';
 import { useState, useRef, useEffect, MouseEvent } from 'react';
 import { StoreState } from '../../reducers';
-import ContextMenu from '../Menus/ContextMenu';
+import { ContextMenu } from '../Menus/ContextMenu';
 
 import './Map.css';
 
 const _Map = ({
   map: { sectorSize, horizontalSectors, verticalSectors, sectorIndent },
+  menu: { contextMenu },
   disableMenu,
+  toggleContextMenu,
 }: any) => {
-  const [contextMenu, setContextMenu] = useState(false);
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   let canvasRef = useRef<HTMLCanvasElement | null>(null);
   let ctx = useRef<CanvasRenderingContext2D | null>(null);
@@ -64,13 +65,13 @@ const _Map = ({
   function handleLeftClick(e: MouseEvent) {
     e.preventDefault();
     disableMenu();
-    setContextMenu(false);
+    toggleContextMenu(false);
   }
   function handleRightClick(e: MouseEvent) {
     e.preventDefault();
     disableMenu();
     setAnchorPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
-    setContextMenu(true);
+    toggleContextMenu(true);
   }
 
   return (
@@ -91,6 +92,9 @@ const _Map = ({
 
 const mapStateToProps = (state: StoreState) => ({
   map: state.map,
+  menu: state.menu,
 });
 
-export const Map = connect(mapStateToProps, { disableMenu })(_Map);
+export const Map = connect(mapStateToProps, { disableMenu, toggleContextMenu })(
+  _Map
+);
