@@ -1,12 +1,16 @@
-export class Unit {
-  public mb_status: boolean;
+export abstract class Unit {
+  public mb_status = false;
+  public image: HTMLImageElement | undefined;
 
   constructor(
-    public X: number,
-    public Y: number,
-    public own: number,
+    public pos_x: number,
+    public pos_y: number,
+    public owner: number,
     public vehicleID: number
-  ) {
-    this.mb_status = true;
+  ) {}
+
+  updateImage(width: number, height: number): void {
+    this.image = new Image(width, height);
+    if (this.vehicleID === 56) this.image.src = '../resources/img/res.png';
   }
 }
