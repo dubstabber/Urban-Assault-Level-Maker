@@ -5,9 +5,16 @@ import { StoreState } from '../../reducers';
 import { ContextMenu } from '../Menus/ContextMenu';
 
 import './Map.css';
+import { Hoststation } from '../../UA structures/Hoststation';
 
 const _Map = ({
-  map: { sectorSize, horizontalSectors, verticalSectors, sectorIndent },
+  map: {
+    sectorSize,
+    horizontalSectors,
+    verticalSectors,
+    sectorIndent,
+    hostStations,
+  },
   menu: { contextMenu },
   disableMenu,
   toggleContextMenu,
@@ -39,6 +46,7 @@ const _Map = ({
 
   function draw() {
     if (canvasRef.current && ctx.current) {
+      console.log(hostStations);
       ctx.current.clearRect(
         0,
         0,
@@ -58,6 +66,11 @@ const _Map = ({
           }
         }
       }
+      hostStations.forEach((hs: Hoststation) => {
+        if (hs.image) {
+          ctx.current?.drawImage(hs.image, hs.pos_x, hs.pos_y);
+        }
+      });
       ctx.current.stroke();
     }
   }

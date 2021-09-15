@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { toggleMenu, hoverMenu } from '../../actions/menuActions';
 import { StoreState } from '../../reducers';
-import { MenuProps } from './Menus';
 
 const _ViewMenu = ({
   id,

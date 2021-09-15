@@ -10,7 +10,15 @@ export abstract class Unit {
   ) {}
 
   updateImage(width: number, height: number): void {
-    this.image = new Image(width, height);
-    if (this.vehicleID === 56) this.image.src = '../resources/img/res.png';
+    try {
+      this.image = new Image(width, height);
+      let imageData;
+      if (this.vehicleID === 56)
+        imageData = require('../resources/img/res.png');
+
+      this.image.src = imageData.default;
+    } catch (ex) {
+      console.dir('image could not be loaded');
+    }
   }
 }

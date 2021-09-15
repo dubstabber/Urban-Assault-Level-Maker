@@ -5,4 +5,5 @@ export enum ActionTypes {
   TOGGLE_CONTEXT_MENU,
   TOGGLE_NEWMAP_WINDOW,
   CREATE_MAP,
+  ADD_HOSTSTATION,
 }
