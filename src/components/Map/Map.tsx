@@ -66,12 +66,14 @@ const _Map = ({
           }
         }
       }
+      ctx.current.stroke();
+
+      const hsSize = sectorSize * 0.5;
       hostStations.forEach((hs: Hoststation) => {
         if (hs.image) {
-          ctx.current?.drawImage(hs.image, hs.pos_x, hs.pos_y);
+          ctx.current?.drawImage(hs.image, hs.pos_x, hs.pos_y, hsSize, hsSize);
         }
       });
-      ctx.current.stroke();
     }
   }
 

@@ -11,7 +11,7 @@ export abstract class Unit {
 
   updateImage(width: number, height: number): void {
     try {
-      this.image = new Image(width, height);
+      this.image = new Image();
       let imageData;
       if (this.vehicleID === 56)
         imageData = require('../resources/img/res.png');
