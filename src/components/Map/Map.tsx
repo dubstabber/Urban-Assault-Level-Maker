@@ -19,8 +19,10 @@ const _Map = ({
   disableMenu,
   toggleContextMenu,
 }: any) => {
-  const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
-  let canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [anchorPoint, setAnchorPoint] = useState({ posX: 0, posY: 0 });
+  const [mapSize, setMapSize] = useState({ width: 0, height: 0 });
+  let canvasRef = useRef<HTMLCanvasElement>(null);
+  let mapRef = useRef<HTMLDivElement>(null);
   let ctx = useRef<CanvasRenderingContext2D | null>(null);
 
   useEffect(() => {
@@ -28,6 +30,15 @@ const _Map = ({
       ctx.current = canvasRef.current.getContext('2d');
     }
   }, [canvasRef]);
+
+  useEffect(() => {
+    if (mapRef.current) {
+      setMapSize({
+        width: mapRef.current.offsetWidth,
+        height: mapRef.current.offsetHeight,
+      });
+    }
+  }, [mapRef]);
 
   useEffect(() => {
     if (canvasRef.current && horizontalSectors && verticalSectors) {
@@ -46,7 +57,7 @@ const _Map = ({
 
   function draw() {
     if (canvasRef.current && ctx.current) {
-      console.log(hostStations);
+      // console.log(hostStations);
       ctx.current.clearRect(
         0,
         0,
@@ -85,7 +96,11 @@ const _Map = ({
   function handleRightClick(e: MouseEvent) {
     e.preventDefault();
     disableMenu();
-    setAnchorPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+
+    setAnchorPoint({
+      posX: e.nativeEvent.offsetX,
+      posY: e.nativeEvent.offsetY,
+    });
     toggleContextMenu(true);
   }
 
@@ -94,12 +109,11 @@ const _Map = ({
       <div
         onClick={handleLeftClick}
         onContextMenu={handleRightClick}
+        ref={mapRef}
         className="map"
       >
         <canvas ref={canvasRef}></canvas>
-        {contextMenu && (
-          <ContextMenu posX={anchorPoint.x} posY={anchorPoint.y} />
-        )}
+        {contextMenu && <ContextMenu point={anchorPoint} size={mapSize} />}
       </div>
     </>
   );

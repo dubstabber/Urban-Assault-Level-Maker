@@ -1,17 +1,41 @@
 import { connect } from 'react-redux';
 import { toggleContextMenu } from '../../actions/menuActions';
 import { addHostStation } from '../../actions/mapActions';
-import { MouseEvent } from 'react';
+import { useState, useEffect, useRef, MouseEvent } from 'react';
 
 import './ContextMenu.css';
 import '../../css/host-station-icons.css';
 
 const _ContextMenu = ({
-  posX,
-  posY,
+  point,
+  size,
   toggleContextMenu,
   addHostStation,
 }: any) => {
+  const [menuX, setMenuX] = useState(point.posX);
+  const [menuY, setMenuY] = useState(point.posY);
+  const menuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (menuRef.current) {
+      const rightSideX = point.posX + menuRef.current.offsetWidth;
+      if (rightSideX > size.width) {
+        const overflowX = rightSideX - size.width;
+        setMenuX(point.posX - overflowX);
+      } else {
+        setMenuX(point.posX);
+      }
+
+      const bottomSideY = point.posY + menuRef.current.offsetHeight;
+      if (bottomSideY > size.height) {
+        const overflowY = bottomSideY - size.height;
+        setMenuY(point.posY - overflowY);
+      } else {
+        setMenuY(point.posY);
+      }
+    }
+  }, [point, size]);
+
   function handleClick(e: MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
@@ -22,7 +46,7 @@ const _ContextMenu = ({
 
     switch (id) {
       case 1:
-        addHostStation(posX, posY, id, 56);
+        addHostStation(point.posX, point.posY, id, 56);
         break;
     }
     console.log(`create a host station: ${id}`);
@@ -32,8 +56,9 @@ const _ContextMenu = ({
     <ul
       onClick={handleClick}
       onContextMenu={handleClick}
+      ref={menuRef}
       className="contextMenu"
-      style={{ top: posY, left: posX }}
+      style={{ top: menuY, left: menuX }}
     >
       <li className="menu__items">
         Add host station here
