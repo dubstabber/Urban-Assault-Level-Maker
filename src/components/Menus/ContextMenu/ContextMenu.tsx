@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import { toggleContextMenu } from '../../actions/menuActions';
-import { addHostStation } from '../../actions/mapActions';
+import { toggleContextMenu } from '../../../actions/menuActions';
+import { addHostStation } from '../../../actions/mapActions';
 import { useState, useEffect, useRef, MouseEvent } from 'react';
+import { AddHostStationMenu } from './SubMenus/AddHostStationMenu';
 
 import './ContextMenu.css';
-import '../../css/host-station-icons.css';
+import '../../../css/host-station-icons.css';
 
 const _ContextMenu = ({
   point,
@@ -41,17 +42,6 @@ const _ContextMenu = ({
     e.stopPropagation();
   }
 
-  function addHS(id: number): void {
-    toggleContextMenu(false);
-
-    switch (id) {
-      case 1:
-        addHostStation(point.posX, point.posY, id, 56);
-        break;
-    }
-    console.log(`create a host station: ${id}`);
-  }
-
   return (
     <ul
       onClick={handleClick}
@@ -60,33 +50,7 @@ const _ContextMenu = ({
       className="contextMenu"
       style={{ top: menuY, left: menuX }}
     >
-      <li className="menu__items">
-        Add host station here
-        <ul className="menu__submenu">
-          <li className="menu__item" onClick={() => addHS(1)}>
-            <i className="host-station-icon resistance-icon"></i>Resistance
-          </li>
-          <li className="menu__item" onClick={() => addHS(6)}>
-            <i className="host-station-icon ghorkov-icon"></i>Ghorkov
-          </li>
-          <li className="menu__item" onClick={() => addHS(4)}>
-            <i className="host-station-icon taerkasten-icon"></i>Taerkasten
-          </li>
-          <li className="menu__item" onClick={() => addHS(3)}>
-            <i className="host-station-icon mykonian-icon"></i>Mykonian
-          </li>
-          <li className="menu__item" onClick={() => addHS(2)}>
-            <i className="host-station-icon sulgogar-icon"></i>Sulgogar
-          </li>
-          <li className="menu__item" onClick={() => addHS(5)}>
-            <i className="host-station-icon black-sect-icon"></i>Black Sect
-          </li>
-          <li className="menu__item" onClick={() => addHS(7)}>
-            <i className="host-station-icon training-icon"></i>Training host
-            station
-          </li>
-        </ul>
-      </li>
+      <AddHostStationMenu point={point} />
       <li className="menu__items">Add squad here</li>
       <li className="menu__item">Set sector faction to</li>
       <li className="menu__item">Set height here</li>

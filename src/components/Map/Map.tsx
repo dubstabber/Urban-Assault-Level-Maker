@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { disableMenu, toggleContextMenu } from '../../actions/menuActions';
 import { useState, useRef, useEffect, MouseEvent } from 'react';
 import { StoreState } from '../../reducers';
-import { ContextMenu } from '../Menus/ContextMenu';
+import { ContextMenu } from '../Menus/ContextMenu/ContextMenu';
 
 import './Map.css';
 import { Hoststation } from '../../UA structures/Hoststation';
