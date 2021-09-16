@@ -1,17 +1,9 @@
 import { connect } from 'react-redux';
 import { FileMenu } from './FileMenu';
 import { ViewMenu } from './ViewMenu';
-import { MenuState } from '../../reducers/menuReducer';
 import { toggleContextMenu } from '../../actions/menuActions';
 
 import './Menus.css';
-
-export interface MenuProps {
-  menu: MenuState;
-  toggleMenu(): void;
-  hoverMenu(menuId: number): void;
-  id: number;
-}
 
 const _Menus = ({ toggleContextMenu }: any) => {
   return (

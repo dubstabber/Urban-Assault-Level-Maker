@@ -1,44 +1,57 @@
 import { connect } from 'react-redux';
 import { toggleContextMenu } from '../../../../actions/menuActions';
 import { addHostStation } from '../../../../actions/mapActions';
-import React from 'react';
+import { useState, useRef } from 'react';
 
 const _AddHostStationMenu = ({
   point,
+  mapSize,
   toggleContextMenu,
   addHostStation,
 }: any) => {
+  const [positionX, setPositionX] = useState('100%');
+  const menuRef = useRef<HTMLUListElement>(null);
+
   function addHS(id: number): void {
     toggleContextMenu(false);
 
     switch (id) {
       case 1:
-        addHostStation(point.posX, point.posY, id, 56);
+        addHostStation(point.spawnX, point.spawnY, id, 56);
         break;
       case 2:
-        addHostStation(point.posX, point.posY, id, 61);
+        addHostStation(point.spawnX, point.spawnY, id, 61);
         break;
       case 3:
-        addHostStation(point.posX, point.posY, id, 58);
+        addHostStation(point.spawnX, point.spawnY, id, 58);
         break;
       case 4:
-        addHostStation(point.posX, point.posY, id, 60);
+        addHostStation(point.spawnX, point.spawnY, id, 60);
         break;
       case 5:
-        addHostStation(point.posX, point.posY, id, 62);
+        addHostStation(point.spawnX, point.spawnY, id, 62);
         break;
       case 6:
-        addHostStation(point.posX, point.posY, id, 59);
+        addHostStation(point.spawnX, point.spawnY, id, 59);
         break;
       case 7:
-        addHostStation(point.posX, point.posY, id, 132);
+        addHostStation(point.spawnX, point.spawnY, id, 132);
         break;
     }
   }
+
+  function handleHover(e: any) {
+    if (menuRef.current) {
+      const rightSideX =
+        // console.log(menuRef.current.offsetWidth);
+        console.log(menuRef.current);
+    }
+  }
+
   return (
-    <li className="menu__items">
+    <li onMouseEnter={handleHover} className="menu__items">
       Add host station here
-      <ul className="menu__submenu">
+      <ul ref={menuRef} style={{ left: positionX }} className="menu__submenu">
         <li className="menu__item" onClick={() => addHS(1)}>
           <i className="host-station-icon resistance-icon"></i>Resistance
         </li>

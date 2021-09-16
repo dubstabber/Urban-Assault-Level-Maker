@@ -50,7 +50,13 @@ const _ContextMenu = ({
       className="contextMenu"
       style={{ top: menuY, left: menuX }}
     >
-      <AddHostStationMenu point={point} />
+      <AddHostStationMenu
+        point={{
+          spawnX: point.posX,
+          spawnY: point.posY,
+        }}
+        mapSize={size}
+      />
       <li className="menu__items">Add squad here</li>
       <li className="menu__item">Set sector faction to</li>
       <li className="menu__item">Set height here</li>
