@@ -10,7 +10,14 @@ import { StoreState } from '../../../reducers';
 
 const _ContextMenu = ({
   toggleContextMenu,
-  menu: { clickedX, clickedY, screenWidth, screenHeight },
+  menu: {
+    clickedX,
+    clickedY,
+    clickedWindowX,
+    clickedWindowY,
+    screenWidth,
+    screenHeight,
+  },
 }: any) => {
   const [menuX, setMenuX] = useState(clickedX);
   const [menuY, setMenuY] = useState(clickedY);
@@ -20,22 +27,22 @@ const _ContextMenu = ({
 
   useEffect(() => {
     if (menuRef.current) {
-      setRightSide(clickedX + menuRef.current.offsetWidth);
-      setBottomSide(clickedY + menuRef.current.offsetHeight);
+      setRightSide(clickedWindowX + menuRef.current.offsetWidth);
+      setBottomSide(clickedWindowY + menuRef.current.offsetHeight);
     }
-  }, [menuRef, clickedX, clickedY]);
+  }, [menuRef, clickedWindowX, clickedWindowY]);
 
   useEffect(() => {
     if (menuRef.current && rightSide && bottomSide) {
       if (rightSide > screenWidth) {
-        const overflowX = rightSide - screenWidth;
+        const overflowX = rightSide - screenWidth + 20;
         setMenuX(clickedX - overflowX);
       } else {
         setMenuX(clickedX);
       }
 
       if (bottomSide > screenHeight) {
-        const overflowY = bottomSide - screenHeight;
+        const overflowY = bottomSide - screenHeight + 20;
         setMenuY(clickedY - overflowY);
       } else {
         setMenuY(clickedY);

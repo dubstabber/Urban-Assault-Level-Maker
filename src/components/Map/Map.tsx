@@ -38,6 +38,9 @@ const _Map = ({
 
   useEffect(() => {
     if (mapRef.current) {
+      console.log(
+        `$width: ${mapRef.current.offsetWidth} height: ${mapRef.current.offsetHeight}`
+      );
       setWindowSize(mapRef.current.offsetWidth, mapRef.current.offsetHeight);
     }
   }, [mapRef, setWindowSize]);
@@ -95,11 +98,21 @@ const _Map = ({
     disableMenu();
     toggleContextMenu(false);
   }
-  function handleRightClick(e: MouseEvent) {
+  function handleRightClick(e: any) {
     e.preventDefault();
     disableMenu();
-
-    setClickedPoints(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+    if (mapRef.current) {
+      const windowX =
+        e.pageX - Math.round(mapRef.current.getBoundingClientRect().left);
+      const windowY =
+        e.pageY - Math.round(mapRef.current.getBoundingClientRect().top);
+      setClickedPoints(
+        e.nativeEvent.offsetX,
+        e.nativeEvent.offsetY,
+        windowX,
+        windowY
+      );
+    }
     toggleContextMenu(true);
   }
 

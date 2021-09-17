@@ -29,9 +29,12 @@ export const toggleContextMenu =
   };
 
 export const setClickedPoints =
-  (x: number, y: number) =>
+  (x: number, y: number, windowX: number, windowY: number) =>
   (dispatch: Dispatch): void => {
-    dispatch({ type: ActionTypes.SET_CLICKED_POINTS, payload: { x, y } });
+    dispatch({
+      type: ActionTypes.SET_CLICKED_POINTS,
+      payload: { x, y, windowX, windowY },
+    });
   };
 
 export const setWindowSize =

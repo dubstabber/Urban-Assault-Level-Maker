@@ -49,7 +49,7 @@ const _AddHostStationMenu = ({
   function handleHover(e: any) {
     if (menuRef.current) {
       if (point.rightCorner + menuRef.current.offsetWidth > screenWidth) {
-        setPositionX('-90%');
+        setPositionX('-95%');
       } else {
         setPositionX('100%');
       }

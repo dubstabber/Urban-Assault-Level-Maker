@@ -6,6 +6,8 @@ export interface MenuState {
   contextMenu: boolean;
   clickedX: number;
   clickedY: number;
+  clickedWindowX: number;
+  clickedWindowY: number;
   screenWidth: number;
   screenHeight: number;
 }
@@ -16,6 +18,8 @@ const initialState: MenuState = {
   contextMenu: false,
   clickedX: 0,
   clickedY: 0,
+  clickedWindowX: 0,
+  clickedWindowY: 0,
   screenWidth: 0,
   screenHeight: 0,
 };
@@ -56,6 +60,8 @@ const menuReducer = (
         ...state,
         clickedX: action.payload.x,
         clickedY: action.payload.y,
+        clickedWindowX: action.payload.windowX,
+        clickedWindowY: action.payload.windowY,
       };
     default:
       return state;
