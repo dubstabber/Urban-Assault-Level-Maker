@@ -4,17 +4,25 @@ export interface MenuState {
   activatedMenu: boolean;
   hoverMenuId: number;
   contextMenu: boolean;
+  clickedX: number;
+  clickedY: number;
+  screenWidth: number;
+  screenHeight: number;
 }
 
 const initialState: MenuState = {
   activatedMenu: false,
   hoverMenuId: 0,
   contextMenu: false,
+  clickedX: 0,
+  clickedY: 0,
+  screenWidth: 0,
+  screenHeight: 0,
 };
 
 const menuReducer = (
   state = initialState,
-  action: { type: number; payload: { menuId: number; contextState: boolean } }
+  action: { type: number; payload: any }
 ) => {
   switch (action.type) {
     case ActionTypes.TOGGLE_MENU:
@@ -36,6 +44,18 @@ const menuReducer = (
       return {
         ...state,
         contextMenu: action.payload.contextState,
+      };
+    case ActionTypes.SET_WINDOW_SIZE:
+      return {
+        ...state,
+        screenWidth: action.payload.width,
+        screenHeight: action.payload.height,
+      };
+    case ActionTypes.SET_CLICKED_POINTS:
+      return {
+        ...state,
+        clickedX: action.payload.x,
+        clickedY: action.payload.y,
       };
     default:
       return state;

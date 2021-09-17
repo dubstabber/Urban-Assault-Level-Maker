@@ -6,36 +6,42 @@ import { AddHostStationMenu } from './SubMenus/AddHostStationMenu';
 
 import './ContextMenu.css';
 import '../../../css/host-station-icons.css';
+import { StoreState } from '../../../reducers';
 
 const _ContextMenu = ({
-  point,
-  size,
   toggleContextMenu,
-  addHostStation,
+  menu: { clickedX, clickedY, screenWidth, screenHeight },
 }: any) => {
-  const [menuX, setMenuX] = useState(point.posX);
-  const [menuY, setMenuY] = useState(point.posY);
+  const [menuX, setMenuX] = useState(clickedX);
+  const [menuY, setMenuY] = useState(clickedY);
+  const [rightSide, setRightSide] = useState();
+  const [bottomSide, setBottomSide] = useState();
   const menuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     if (menuRef.current) {
-      const rightSideX = point.posX + menuRef.current.offsetWidth;
-      if (rightSideX > size.width) {
-        const overflowX = rightSideX - size.width;
-        setMenuX(point.posX - overflowX);
+      setRightSide(clickedX + menuRef.current.offsetWidth);
+      setBottomSide(clickedY + menuRef.current.offsetHeight);
+    }
+  }, [menuRef, clickedX, clickedY]);
+
+  useEffect(() => {
+    if (menuRef.current && rightSide && bottomSide) {
+      if (rightSide > screenWidth) {
+        const overflowX = rightSide - screenWidth;
+        setMenuX(clickedX - overflowX);
       } else {
-        setMenuX(point.posX);
+        setMenuX(clickedX);
       }
 
-      const bottomSideY = point.posY + menuRef.current.offsetHeight;
-      if (bottomSideY > size.height) {
-        const overflowY = bottomSideY - size.height;
-        setMenuY(point.posY - overflowY);
+      if (bottomSide > screenHeight) {
+        const overflowY = bottomSide - screenHeight;
+        setMenuY(clickedY - overflowY);
       } else {
-        setMenuY(point.posY);
+        setMenuY(clickedY);
       }
     }
-  }, [point, size]);
+  }, [clickedX, clickedY, rightSide, bottomSide, screenWidth, screenHeight]);
 
   function handleClick(e: MouseEvent) {
     e.preventDefault();
@@ -50,13 +56,14 @@ const _ContextMenu = ({
       className="contextMenu"
       style={{ top: menuY, left: menuX }}
     >
-      <AddHostStationMenu
-        point={{
-          spawnX: point.posX,
-          spawnY: point.posY,
-        }}
-        mapSize={size}
-      />
+      {menuRef.current && (
+        <AddHostStationMenu
+          point={{
+            rightCorner: rightSide,
+            bottomCorner: bottomSide,
+          }}
+        />
+      )}
       <li className="menu__items">Add squad here</li>
       <li className="menu__item">Set sector faction to</li>
       <li className="menu__item">Set height here</li>
@@ -68,6 +75,11 @@ const _ContextMenu = ({
   );
 };
 
-export const ContextMenu = connect(null, { toggleContextMenu, addHostStation })(
-  _ContextMenu
-);
+const mapStateToProps = (state: StoreState) => ({
+  menu: state.menu,
+});
+
+export const ContextMenu = connect(mapStateToProps, {
+  toggleContextMenu,
+  addHostStation,
+})(_ContextMenu);

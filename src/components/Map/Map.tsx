@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
-import { disableMenu, toggleContextMenu } from '../../actions/menuActions';
-import { useState, useRef, useEffect, MouseEvent } from 'react';
+import {
+  disableMenu,
+  toggleContextMenu,
+  setClickedPoints,
+  setWindowSize,
+} from '../../actions/menuActions';
+import { useRef, useEffect, MouseEvent } from 'react';
 import { StoreState } from '../../reducers';
 import { ContextMenu } from '../Menus/ContextMenu/ContextMenu';
 
@@ -18,9 +23,9 @@ const _Map = ({
   menu: { contextMenu },
   disableMenu,
   toggleContextMenu,
+  setWindowSize,
+  setClickedPoints,
 }: any) => {
-  const [anchorPoint, setAnchorPoint] = useState({ posX: 0, posY: 0 });
-  const [mapSize, setMapSize] = useState({ width: 0, height: 0 });
   let canvasRef = useRef<HTMLCanvasElement>(null);
   let mapRef = useRef<HTMLDivElement>(null);
   let ctx = useRef<CanvasRenderingContext2D | null>(null);
@@ -33,12 +38,9 @@ const _Map = ({
 
   useEffect(() => {
     if (mapRef.current) {
-      setMapSize({
-        width: mapRef.current.offsetWidth,
-        height: mapRef.current.offsetHeight,
-      });
+      setWindowSize(mapRef.current.offsetWidth, mapRef.current.offsetHeight);
     }
-  }, [mapRef]);
+  }, [mapRef, setWindowSize]);
 
   useEffect(() => {
     if (canvasRef.current && horizontalSectors && verticalSectors) {
@@ -97,10 +99,7 @@ const _Map = ({
     e.preventDefault();
     disableMenu();
 
-    setAnchorPoint({
-      posX: e.nativeEvent.offsetX,
-      posY: e.nativeEvent.offsetY,
-    });
+    setClickedPoints(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
     toggleContextMenu(true);
   }
 
@@ -113,7 +112,7 @@ const _Map = ({
         className="map"
       >
         <canvas ref={canvasRef}></canvas>
-        {contextMenu && <ContextMenu point={anchorPoint} size={mapSize} />}
+        {contextMenu && <ContextMenu />}
       </div>
     </>
   );
@@ -124,6 +123,9 @@ const mapStateToProps = (state: StoreState) => ({
   menu: state.menu,
 });
 
-export const Map = connect(mapStateToProps, { disableMenu, toggleContextMenu })(
-  _Map
-);
+export const Map = connect(mapStateToProps, {
+  disableMenu,
+  toggleContextMenu,
+  setClickedPoints,
+  setWindowSize,
+})(_Map);

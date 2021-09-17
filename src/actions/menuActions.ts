@@ -27,3 +27,15 @@ export const toggleContextMenu =
       payload: { contextState: state },
     });
   };
+
+export const setClickedPoints =
+  (x: number, y: number) =>
+  (dispatch: Dispatch): void => {
+    dispatch({ type: ActionTypes.SET_CLICKED_POINTS, payload: { x, y } });
+  };
+
+export const setWindowSize =
+  (width: number, height: number) =>
+  (dispatch: Dispatch): void => {
+    dispatch({ type: ActionTypes.SET_WINDOW_SIZE, payload: { width, height } });
+  };

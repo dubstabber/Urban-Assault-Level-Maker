@@ -1,50 +1,58 @@
 import { connect } from 'react-redux';
 import { toggleContextMenu } from '../../../../actions/menuActions';
 import { addHostStation } from '../../../../actions/mapActions';
-import { useState, useRef } from 'react';
+import { StoreState } from '../../../../reducers';
+import { useState, useEffect, useRef } from 'react';
 
 const _AddHostStationMenu = ({
   point,
-  mapSize,
   toggleContextMenu,
   addHostStation,
+  menu: { clickedX, clickedY, screenWidth, screenHeight },
 }: any) => {
   const [positionX, setPositionX] = useState('100%');
   const menuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (menuRef.current) {
+    }
+  }, [menuRef, point.rightCorner, screenWidth]);
 
   function addHS(id: number): void {
     toggleContextMenu(false);
 
     switch (id) {
       case 1:
-        addHostStation(point.spawnX, point.spawnY, id, 56);
+        addHostStation(clickedX, clickedY, id, 56);
         break;
       case 2:
-        addHostStation(point.spawnX, point.spawnY, id, 61);
+        addHostStation(clickedX, clickedY, id, 61);
         break;
       case 3:
-        addHostStation(point.spawnX, point.spawnY, id, 58);
+        addHostStation(clickedX, clickedY, id, 58);
         break;
       case 4:
-        addHostStation(point.spawnX, point.spawnY, id, 60);
+        addHostStation(clickedX, clickedY, id, 60);
         break;
       case 5:
-        addHostStation(point.spawnX, point.spawnY, id, 62);
+        addHostStation(clickedX, clickedY, id, 62);
         break;
       case 6:
-        addHostStation(point.spawnX, point.spawnY, id, 59);
+        addHostStation(clickedX, clickedY, id, 59);
         break;
       case 7:
-        addHostStation(point.spawnX, point.spawnY, id, 132);
+        addHostStation(clickedX, clickedY, id, 132);
         break;
     }
   }
 
   function handleHover(e: any) {
     if (menuRef.current) {
-      const rightSideX =
-        // console.log(menuRef.current.offsetWidth);
-        console.log(menuRef.current);
+      if (point.rightCorner + menuRef.current.offsetWidth > screenWidth) {
+        setPositionX('-90%');
+      } else {
+        setPositionX('100%');
+      }
     }
   }
 
@@ -79,7 +87,11 @@ const _AddHostStationMenu = ({
   );
 };
 
-export const AddHostStationMenu = connect(null, {
+const mapStateToProps = (state: StoreState) => ({
+  menu: state.menu,
+});
+
+export const AddHostStationMenu = connect(mapStateToProps, {
   toggleContextMenu,
   addHostStation,
 })(_AddHostStationMenu);
