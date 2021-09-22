@@ -34,15 +34,16 @@ const _ContextMenu = ({
 
   useEffect(() => {
     if (menuRef.current && rightSide && bottomSide) {
+      const scrollOffset = 20;
       if (rightSide > screenWidth) {
-        const overflowX = rightSide - screenWidth + 20;
+        const overflowX = rightSide - screenWidth + scrollOffset;
         setMenuX(clickedX - overflowX);
       } else {
         setMenuX(clickedX);
       }
 
       if (bottomSide > screenHeight) {
-        const overflowY = bottomSide - screenHeight + 20;
+        const overflowY = bottomSide - screenHeight + scrollOffset;
         setMenuY(clickedY - overflowY);
       } else {
         setMenuY(clickedY);

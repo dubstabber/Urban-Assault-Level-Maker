@@ -38,9 +38,6 @@ const _Map = ({
 
   useEffect(() => {
     if (mapRef.current) {
-      console.log(
-        `$width: ${mapRef.current.offsetWidth} height: ${mapRef.current.offsetHeight}`
-      );
       setWindowSize(mapRef.current.offsetWidth, mapRef.current.offsetHeight);
     }
   }, [mapRef, setWindowSize]);
@@ -87,7 +84,13 @@ const _Map = ({
       const hsSize = sectorSize * 0.5;
       hostStations.forEach((hs: Hoststation) => {
         if (hs.image) {
-          ctx.current?.drawImage(hs.image, hs.pos_x, hs.pos_y, hsSize, hsSize);
+          ctx.current?.drawImage(
+            hs.image,
+            hs.pos_x - hsSize / 2,
+            hs.pos_y - hsSize / 2,
+            hsSize,
+            hsSize
+          );
         }
       });
     }
