@@ -34,6 +34,7 @@ export abstract class Unit {
         imageData = require('../resources/img/Training.png');
 
       this.image.src = imageData.default;
+      this.image.draggable = true;
     } catch (ex) {
       console.dir('image could not be loaded');
     }

@@ -1,6 +1,7 @@
 import { ActionTypes } from './types';
 import { Dispatch } from 'redux';
 import { Hoststation } from '../UA structures/Hoststation';
+import { Unit } from '../UA structures/Unit';
 
 export const createMap =
   (horizontalNumber: number, verticalNumber: number) =>
@@ -20,3 +21,11 @@ export const addHostStation =
       payload: { newHostStation },
     });
   };
+
+export const selectUnit = (unit: Unit) => (dispatch: Dispatch) => {
+  if (unit) {
+    dispatch({ type: ActionTypes.SELECT_UNIT, payload: { unit } });
+  } else {
+    dispatch({ type: ActionTypes.SELECT_UNIT, payload: { unit: null } });
+  }
+};

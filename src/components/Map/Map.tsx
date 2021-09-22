@@ -5,12 +5,14 @@ import {
   setClickedPoints,
   setWindowSize,
 } from '../../actions/menuActions';
-import { useRef, useEffect, MouseEvent } from 'react';
+import { selectUnit } from '../../actions/mapActions';
+import { useState, useRef, useEffect, MouseEvent } from 'react';
 import { StoreState } from '../../reducers';
 import { ContextMenu } from '../Menus/ContextMenu/ContextMenu';
 
 import './Map.css';
 import { Hoststation } from '../../UA structures/Hoststation';
+import { Unit } from '../../UA structures/Unit';
 
 const _Map = ({
   map: {
@@ -18,6 +20,7 @@ const _Map = ({
     horizontalSectors,
     verticalSectors,
     sectorIndent,
+    selectedUnit,
     hostStations,
   },
   menu: { contextMenu },
@@ -25,7 +28,9 @@ const _Map = ({
   toggleContextMenu,
   setWindowSize,
   setClickedPoints,
+  selectUnit,
 }: any) => {
+  const [draggable, setDraggable] = useState(false);
   let canvasRef = useRef<HTMLCanvasElement>(null);
   let mapRef = useRef<HTMLDivElement>(null);
   let ctx = useRef<CanvasRenderingContext2D | null>(null);
@@ -59,7 +64,6 @@ const _Map = ({
 
   function draw() {
     if (canvasRef.current && ctx.current) {
-      // console.log(hostStations);
       ctx.current.clearRect(
         0,
         0,
@@ -119,6 +123,43 @@ const _Map = ({
     toggleContextMenu(true);
   }
 
+  function handleSelection(e: any): void {
+    if (canvasRef.current) {
+      const clickedX =
+        e.pageX - Math.round(canvasRef.current.getBoundingClientRect().left);
+      const clickedY =
+        e.pageY - Math.round(canvasRef.current.getBoundingClientRect().top);
+      // console.log(`ClickedX: ${clickedX} clickedY: ${clickedY}`);
+      let selectedUnit: Unit | null = null;
+
+      const hsSize = sectorSize * 0.5;
+      hostStations.every((hs: Unit): boolean => {
+        const topCorner = hs.pos_y - hsSize / 2;
+        const rightCorner = hs.pos_x + hsSize / 2;
+        const bottomCorner = hs.pos_y + hsSize / 2;
+        const leftCorner = hs.pos_x - hsSize / 2;
+        if (
+          topCorner < clickedY &&
+          rightCorner > clickedX &&
+          bottomCorner > clickedY &&
+          leftCorner < clickedX
+        ) {
+          selectedUnit = hs;
+          return false;
+        } else {
+          return true;
+        }
+      });
+      selectUnit(selectedUnit);
+    }
+  }
+
+  function drag(e: any) {
+    if (draggable) {
+      console.log('dragging');
+    }
+  }
+
   return (
     <>
       <div
@@ -127,7 +168,11 @@ const _Map = ({
         ref={mapRef}
         className="map"
       >
-        <canvas ref={canvasRef}></canvas>
+        <canvas
+          onMouseDown={handleSelection}
+          onMouseMove={drag}
+          ref={canvasRef}
+        ></canvas>
         {contextMenu && <ContextMenu />}
       </div>
     </>
@@ -144,4 +189,5 @@ export const Map = connect(mapStateToProps, {
   toggleContextMenu,
   setClickedPoints,
   setWindowSize,
+  selectUnit,
 })(_Map);
