@@ -125,6 +125,7 @@ const _Map = ({
 
   function handleSelection(e: any): void {
     if (canvasRef.current) {
+      setDraggable(true);
       const clickedX =
         e.pageX - Math.round(canvasRef.current.getBoundingClientRect().left);
       const clickedY =
@@ -155,8 +156,15 @@ const _Map = ({
   }
 
   function drag(e: any) {
-    if (draggable) {
-      console.log('dragging');
+    if (draggable && selectedUnit && canvasRef.current) {
+      const draggedX =
+        e.pageX - Math.round(canvasRef.current.getBoundingClientRect().left);
+      const draggedY =
+        e.pageY - Math.round(canvasRef.current.getBoundingClientRect().top);
+
+      selectedUnit.pos_x = draggedX;
+      selectedUnit.pos_y = draggedY;
+      draw();
     }
   }
 
@@ -170,6 +178,7 @@ const _Map = ({
       >
         <canvas
           onMouseDown={handleSelection}
+          onMouseUp={() => setDraggable(false)}
           onMouseMove={drag}
           ref={canvasRef}
         ></canvas>
