@@ -8,5 +8,6 @@ export enum ActionTypes {
   TOGGLE_NEWMAP_WINDOW,
   CREATE_MAP,
   ADD_HOSTSTATION,
+  ADD_SQUAD,
   SELECT_UNIT,
 }

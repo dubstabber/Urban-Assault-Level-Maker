@@ -1,5 +1,6 @@
 import { ActionTypes } from '../actions/types';
 import { Hoststation } from '../UA structures/Hoststation';
+import { Squad } from '../UA structures/Squad';
 import { Unit } from '../UA structures/Unit';
 import UAdata from '../UAdata.json';
 
@@ -11,6 +12,7 @@ export interface MapState {
   data: Object;
   selectedUnit: Unit | null;
   hostStations: Array<Hoststation>;
+  squads: Array<Squad>;
 }
 
 const initialState: MapState = {
@@ -21,6 +23,7 @@ const initialState: MapState = {
   data: UAdata.original,
   selectedUnit: null,
   hostStations: [],
+  squads: [],
 };
 
 const mapReducer = (
@@ -41,6 +44,13 @@ const mapReducer = (
         state.sectorSize * 0.5
       );
       state.hostStations.push(action.payload.newHostStation);
+      return state;
+    case ActionTypes.ADD_SQUAD:
+      action.payload.newSquad.updateImage(
+        state.sectorSize * 0.14,
+        state.sectorSize * 0.14
+      );
+      state.squads.push(action.payload.newSquad);
       return state;
     case ActionTypes.SELECT_UNIT:
       return {
