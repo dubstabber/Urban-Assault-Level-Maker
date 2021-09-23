@@ -31,6 +31,8 @@ const _Map = ({
   selectUnit,
 }: any) => {
   const [draggable, setDraggable] = useState(false);
+  const diffX = useRef(0);
+  const diffY = useRef(0);
   let canvasRef = useRef<HTMLCanvasElement>(null);
   let mapRef = useRef<HTMLDivElement>(null);
   let ctx = useRef<CanvasRenderingContext2D | null>(null);
@@ -62,7 +64,7 @@ const _Map = ({
     draw();
   });
 
-  function draw() {
+  function draw(): void {
     if (canvasRef.current && ctx.current) {
       ctx.current.clearRect(
         0,
@@ -100,12 +102,12 @@ const _Map = ({
     }
   }
 
-  function handleLeftClick(e: MouseEvent) {
+  function handleLeftClick(e: MouseEvent): void {
     e.preventDefault();
     disableMenu();
     toggleContextMenu(false);
   }
-  function handleRightClick(e: any) {
+  function handleRightClick(e: any): void {
     e.preventDefault();
     disableMenu();
     if (mapRef.current) {
@@ -130,7 +132,8 @@ const _Map = ({
         e.pageX - Math.round(canvasRef.current.getBoundingClientRect().left);
       const clickedY =
         e.pageY - Math.round(canvasRef.current.getBoundingClientRect().top);
-      // console.log(`ClickedX: ${clickedX} clickedY: ${clickedY}`);
+      diffX.current = clickedX;
+      diffY.current = clickedY;
       let selectedUnit: Unit | null = null;
 
       const hsSize = sectorSize * 0.5;
@@ -155,15 +158,21 @@ const _Map = ({
     }
   }
 
-  function drag(e: any) {
+  function drag(e: any): void {
     if (draggable && selectedUnit && canvasRef.current) {
       const draggedX =
         e.pageX - Math.round(canvasRef.current.getBoundingClientRect().left);
       const draggedY =
         e.pageY - Math.round(canvasRef.current.getBoundingClientRect().top);
 
-      selectedUnit.pos_x = draggedX;
-      selectedUnit.pos_y = draggedY;
+      diffX.current = draggedX - diffX.current;
+      diffY.current = draggedY - diffY.current;
+
+      selectedUnit.pos_x += diffX.current;
+      selectedUnit.pos_y += diffY.current;
+
+      diffX.current = draggedX;
+      diffY.current = draggedY;
       draw();
     }
   }
