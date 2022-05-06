@@ -3,6 +3,7 @@ import { toggleContextMenu } from '../../../actions/menuActions';
 import { addHostStation } from '../../../actions/mapActions';
 import { useState, useEffect, useRef, MouseEvent } from 'react';
 import { AddHostStationMenu } from './SubMenus/AddHostStationMenu';
+import { SquadFactionMenu } from './SubMenus/SquadFactionMenu';
 
 import './ContextMenu.css';
 import '../../../css/host-station-icons.css';
@@ -72,7 +73,14 @@ const _ContextMenu = ({
           }}
         />
       )}
-      <li className="menu__items">Add squad here</li>
+      {menuRef.current && (
+        <SquadFactionMenu
+          point={{
+            rightCorner: rightSide,
+            bottomCorner: bottomSide,
+          }}
+        />
+      )}
       <li className="menu__item">Set sector faction to</li>
       <li className="menu__item">Set height here</li>
       <li className="menu__items">Add special building here</li>
