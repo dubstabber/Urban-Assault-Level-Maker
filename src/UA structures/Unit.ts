@@ -9,7 +9,7 @@ export abstract class Unit {
     public pos_y: number,
     public owner: number,
     public vehicleID: number
-  ) {}
+  ) { }
 
   updateImage(): void {
     try {
@@ -98,7 +98,7 @@ export abstract class Unit {
         }
       }
 
-      this.image.src = imageData.default;
+      this.image.src = imageData;
       this.image.draggable = true;
     } catch (ex) {
       console.error('image could not be loaded');

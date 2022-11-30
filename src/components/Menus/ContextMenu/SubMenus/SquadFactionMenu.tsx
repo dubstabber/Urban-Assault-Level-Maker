@@ -4,7 +4,10 @@ import AddUnitMenu from './AddUnitMenu';
 export const SquadFactionMenu = (props: any) => {
   const [positionX, setPositionX] = useState('100%');
 
-  function handleHover() {}
+  function handleHover(e: any) {
+    console.log('m hover');
+
+  }
   return (
     <li onMouseEnter={handleHover} className="menu__items">
       Add squad here
